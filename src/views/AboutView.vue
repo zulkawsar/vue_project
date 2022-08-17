@@ -1,4 +1,4 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-  <div></div>
+  <div>About</div>
 </template>
