@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <router-link to="/ev">Event</router-link> |
+        <router-link to="/">Event</router-link> |
         <router-link to="/about">About</router-link>
     </nav>
     <router-view />

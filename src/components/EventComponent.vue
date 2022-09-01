@@ -1,32 +1,39 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
     <div class="event-class">
-        <ul>
-            <li v-for="evd in kawsar" :key="evd.id">{{evd.title}}</li>
-        </ul>
+        <div class="event-info">
+            <h4>{{ event.title }}</h4>
+            <hr />
+            <p>{{ event.body }}</p>
+        </div>
     </div>
-    
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            kawsar: [
-                {
-                    id: 1,
-                    title: 'New list',
-                },
-            ],
-        }
+    name: 'EventCard',
+    props: {
+        event: Object,
     },
-}
+};
 </script>
 
 <style scoped>
 .event-class {
-    border: 1px solid;
-    display: block;
-    position: relative;
+    display: flex;
+    width: 500px;
+    height: 200px;
+    border: 1px solid #000;
+    margin: 10px auto;
+}
+.event-info {
+    text-align: left;
+    padding: 5px;
+}
+.event-info h4 {
+    text-transform: capitalize;
+}
+.event-info p {
+    text-align: justify;
 }
 </style>
