@@ -1,11 +1,38 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import EventView from '../views/EventView.vue';
-/* eslint-disable */
+import EventView from '@/views/EventView.vue';
+import EventDetails from '@/views/event/ViewDetails.vue';
+import EventRegister from '@/views/event/ViewRegister.vue';
+import EventEdit from '@/views/event/ViewEdit.vue';
+import EventLayout from '@/views/event/ViewLayout.vue';
 const routes = [
     {
         path: '/',
         name: 'event',
+        props: (route) => ({ _page: parseInt(route.query.page) || 1 }),
         component: EventView,
+    },
+    {
+        path: '/event/:id',
+        name: 'EventLayout',
+        props: true,
+        component: EventLayout,
+        children: [
+            {
+                path: '',
+                name: 'EventDetails',
+                component: EventDetails,
+            },
+            {
+                path: 'register',
+                name: 'EventRegister',
+                component: EventRegister,
+            },
+            {
+                path: 'edit',
+                name: 'EventEdit',
+                component: EventEdit,
+            },
+        ],
     },
     {
         path: '/about',

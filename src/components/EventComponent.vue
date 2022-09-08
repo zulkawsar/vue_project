@@ -1,12 +1,14 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <div class="event-class">
-        <div class="event-info">
-            <h4>{{ event.title }}</h4>
-            <hr />
-            <p>{{ event.body }}</p>
+    <router-link :to="{ name: 'EventDetails', params: { id: event.id } }">
+        <div class="event-class">
+            <div class="event-info">
+                <h4>{{ event.title }}</h4>
+                <hr />
+                <p>{{ event.body }}</p>
+            </div>
         </div>
-    </div>
+    </router-link>
 </template>
 
 <script>
@@ -14,6 +16,7 @@ export default {
     name: 'EventCard',
     props: {
         event: Object,
+        _page: Number,
     },
 };
 </script>
