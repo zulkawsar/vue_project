@@ -31,8 +31,8 @@ export default {
             .then((result) => {
                 this.event = result.data;
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                this.$route.push({ name: 'PageNotFound' });
             });
     },
 };

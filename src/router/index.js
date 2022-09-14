@@ -4,6 +4,8 @@ import EventDetails from '@/views/event/ViewDetails.vue';
 import EventRegister from '@/views/event/ViewRegister.vue';
 import EventEdit from '@/views/event/ViewEdit.vue';
 import EventLayout from '@/views/event/ViewLayout.vue';
+import NotFound from '@/views/event/ViewNotFoundError.vue';
+
 const routes = [
     {
         path: '/',
@@ -33,6 +35,11 @@ const routes = [
                 component: EventEdit,
             },
         ],
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: 'PageNotFound',
+        component: NotFound,
     },
     {
         path: '/about',
