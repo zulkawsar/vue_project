@@ -5,6 +5,9 @@ import EventRegister from '@/views/event/ViewRegister.vue';
 import EventEdit from '@/views/event/ViewEdit.vue';
 import EventLayout from '@/views/event/ViewLayout.vue';
 import NotFound from '@/views/event/ViewNotFoundError.vue';
+import EventService from '@/services/EventService.js';
+import NProgress from 'nprogress';
+import GStore from '@/store';
 
 const routes = [
     {
@@ -18,6 +21,16 @@ const routes = [
         name: 'EventLayout',
         props: true,
         component: EventLayout,
+        beforeEnter: (to) => {
+            return EventService.getEvent(to.params.id)
+                .then((result) => {
+                    GStore.event = result.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return { name: 'PageNotFound' };
+                });
+        },
         children: [
             {
                 path: '',
@@ -57,4 +70,13 @@ const router = createRouter({
     routes,
 });
 
+router.beforeEach(() => {
+    // to and from are both route objects. must call `next`.
+    NProgress.start();
+});
+
+router.afterEach(() => {
+    // to and from are both route objects. must call `next`.
+    NProgress.done();
+});
 export default router;

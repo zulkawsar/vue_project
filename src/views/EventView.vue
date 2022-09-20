@@ -19,7 +19,6 @@
 <script>
 import eventComponent from '../components/EventComponent.vue';
 import PostService from '@/services/EventService.js';
-import { watchEffect } from '@vue/runtime-core';
 export default {
     props: ['_page'],
     data() {
@@ -31,18 +30,27 @@ export default {
     components: {
         'event-component': eventComponent,
     },
-    created() {
-        watchEffect(() => {
-            PostService.getEvents(2, this._page)
-                .then((response) => {
-                    this.events = response.data;
-                    this.totalEvents = response.headers['x-total-count'];
-                    console.log(this.totalEvents);
-                })
-                .catch((error) => {
-                    console.log(error);
+    beforeRouteEnter(routeTo, routeFrom, next) {
+        PostService.getEvents(2, parseInt(routeTo.query.page) || 1)
+            .then((response) => {
+                next((comp) => {
+                    comp.events = response.data;
+                    comp.totalEvents = response.headers['x-total-count'];
                 });
-        });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    beforeRouteUpdate(routeTo) {
+        PostService.getEvents(2, parseInt(routeTo.query.page) || 1)
+            .then((response) => {
+                this.events = response.data;
+                this.totalEvents = response.headers['x-total-count'];
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
     computed: {
         isNextItem() {
