@@ -4,7 +4,8 @@
     </div>
     <nav>
         <router-link to="/">Event</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/about">About</router-link> |
+        <router-link :to="{ name: 'Register' }">Register</router-link>
     </nav>
     <router-view />
 </template>

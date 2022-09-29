@@ -6,6 +6,7 @@ import EventEdit from '@/views/event/ViewEdit.vue';
 import EventLayout from '@/views/event/ViewLayout.vue';
 import NotFound from '@/views/event/ViewNotFoundError.vue';
 import EventService from '@/services/EventService.js';
+import Register from '@/views/SampleForm.vue';
 import NProgress from 'nprogress';
 import GStore from '@/store';
 
@@ -62,6 +63,11 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () =>
             import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register,
     },
 ];
 
