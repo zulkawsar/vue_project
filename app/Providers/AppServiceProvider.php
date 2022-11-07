@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use App\Responser\Car;
-use App\Responser\Interface\VechicleInterface;
+use App\Services\PaypalGateway;
+use App\Services\PaymentService;
+use App\Services\CustomPaymentGateway;
 use Illuminate\Support\ServiceProvider;
+use App\Responser\Interface\VechicleInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +21,22 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(VechicleInterface::class, function(){
             return new Car();
         });
+
+        
+        // $this->app->bind(PaymentService::class, function(){
+        //     return new PaypalGateway('233124eee');
+        // }, true); // pass true for singleton
+
+        //singleton
+        $this->app->singleton(PaymentService::class, function(){
+            return new PaypalGateway('233124eee');
+        }, true);
+
+        // for 3rd party package service extend 
+        $this->app->singleton(PaymentService::class, function(){
+            return new CustomPaymentGateway('4434233');
+        }, true);
+
     }
 
     /**
