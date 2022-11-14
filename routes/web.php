@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DriverController;
-use App\Http\Controllers\PaymentController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +16,16 @@ use App\Http\Controllers\PaymentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dirver', [DriverController::class,'index']);
-
-Route::get('/payment', [PaymentController::class,'index']);
+require __DIR__.'/auth.php';
