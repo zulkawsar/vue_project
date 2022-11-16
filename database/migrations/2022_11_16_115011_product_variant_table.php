@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+        Schema::create('product_variant', function (Blueprint $table) {
+            $table->ulid('product_id');
+            $table->ulid('variant_id');
             $table->string('name');
-            $table->double('amount', 8, 2);
-            $table->boolean('status')->default(True);
-            $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_variant');
     }
 };
