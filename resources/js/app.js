@@ -1,12 +1,8 @@
-import './bootstrap';
+import { createApp } from 'vue'
+import vuetify from './plugins/vuetify'
 
-import Vue from 'vue'
-import Vuetify from "vuetify";
-Vue.use(Vuetify);
+import Master from './components/master.vue';
 
-import master from './components/master.vue';
 
-new Vue({
-  vuetify: new Vuetify(),
-  render: h => h(master)
-}).$mount('#test');
+
+createApp(Master).use(vuetify).mount('#test')
