@@ -1,7 +1,12 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
+import Vue from 'vue'
+import Vuetify from "vuetify";
+Vue.use(Vuetify);
 
-window.Alpine = Alpine;
+import master from './components/master.vue';
 
-Alpine.start();
+new Vue({
+  vuetify: new Vuetify(),
+  render: h => h(master)
+}).$mount('#test');
