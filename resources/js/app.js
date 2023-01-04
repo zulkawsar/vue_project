@@ -1,8 +1,6 @@
 import { createApp } from 'vue'
 import vuetify from './plugins/vuetify'
 
-import Master from './components/master.vue';
-
-
+import Master from './layouts/master.vue';
 
 createApp(Master).use(vuetify).mount('#test')
