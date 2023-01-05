@@ -1,18 +1,18 @@
 <template>
     <v-col
-        v-for="product in products"
-        :key="product.id"
+        v-for="category in categories"
+        :key="category.id"
         cols="4"
         >
         <v-card height="350">
             <v-img
-              src="https://via.placeholder.com/300.png"
+              :src="category.image"
               class="align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="300px"
               cover
             >
-              <v-card-title class="text-white" v-text="product.title"></v-card-title>
+              <v-card-title class="text-white" v-text="category.name"></v-card-title>
             </v-img>
 
             <v-card-actions>
@@ -33,14 +33,16 @@ import ProductApi from '../../api/ProductApi.js';
 export default {
     data () {
         return {
-            products : {}
+            products : {},
+            categories : {},
         }
     },
     mounted () {
-        ProductApi.getProducts()
+        ProductApi.getCategories()
             .then(response => {
-                console.log(response)
-                this.products = response.data;
+                this.categories = response.data
+                // this.products = response.data;
+                console.log(this.categories)
             })
     }
 

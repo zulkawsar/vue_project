@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com',
+    baseURL: 'http://127.0.0.1:8000/api',
     withCredentials: false,
     headers: {
         Accept: 'application/json',
@@ -12,6 +12,10 @@ const apiClient = axios.create({
 
 export default {
     getProducts(){
-        return apiClient.get('/posts');
+        return apiClient.get('?product');
+    },
+    
+    getCategories(){
+        return apiClient.get('/categories');
     }
 }
