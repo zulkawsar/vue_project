@@ -8,13 +8,7 @@
           size="32"
         ></v-avatar>
 
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          variant="text"
-        >
-          {{ link }}
-        </v-btn>
+        <navbar />
 
         <v-spacer></v-spacer>
 
@@ -39,17 +33,15 @@
 </template>
 
 <script>
-  import ProductPage from '@/pages/home/index.vue' 
+  import ProductPage from '@/pages/home/index.vue'
+  import Navbar from '@/common/navbar.vue' 
   export default {
     data: () => ({
-      links: [
-        'Dashboard',
-        'Messages',
-        'Profile',
-      ],
+      
     }),
     components: {
-      products: ProductPage
+      products: ProductPage,
+      navbar : Navbar
     },
     mounted() {
       console.log('mouted')

@@ -1,18 +1,18 @@
 <template>
     <v-col
-        v-for="category in categories"
-        :key="category.id"
+        v-for="product in products"
+        :key="product.id"
         cols="4"
         >
         <v-card height="350">
             <v-img
-              :src="category.image"
+              src="#"
               class="align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="300px"
               cover
             >
-              <v-card-title class="text-white" v-text="category.name"></v-card-title>
+              <v-card-title class="text-white" v-text="product.name"></v-card-title>
             </v-img>
 
             <v-card-actions>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import ProductApi from '../../api/ProductApi.js';
+import Api from '../../api/Api.js';
 export default {
     data () {
         return {
@@ -38,11 +38,9 @@ export default {
         }
     },
     mounted () {
-        ProductApi.getCategories()
+        Api.getProducts()
             .then(response => {
-                this.categories = response.data
-                // this.products = response.data;
-                console.log(this.categories)
+                this.products = response.data.data
             })
     }
 
