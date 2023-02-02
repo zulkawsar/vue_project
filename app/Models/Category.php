@@ -11,4 +11,9 @@ class Category extends Model
     use HasFactory, HasUlids;
 
     protected $fileable = ['parrent_id','name', 'status']; 
+
+    public function child()
+    {
+        return $this->hasMany(Category::class,'parrent_id');
+    }
 }

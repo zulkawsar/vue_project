@@ -9,6 +9,6 @@ class CategoryService implements CategoryInterface
 {
     public function getCategory()
     {
-        return Category::get();
+        return Category::with('child')->paginate(5);
     }
 }
