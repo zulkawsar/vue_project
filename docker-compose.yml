@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html:cached
+      - ./.docker/nginx:/etc/nginx/conf.d
+    networks:
+      - laravel-network
+    depends_on:
+      - app
+  app:
+    build:
+      context: ./.docker/php
+      dockerfile: DockerFile
+    container_name: laravel-app
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html:cached
+      - ./.docker/php/php-fpm.ini:/usr/local/etc/php/conf.d/laravel.ini
+    networks:
+      - laravel-network
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.5.5
+    container_name: laravel-mariadb
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=laravel_vue
+      - MYSQL_DATABASE=laravel_vue
+      - MYSQL_PASSWORD=laravel_vue
+    networks:
+      - laravel-network
+networks:
+  laravel-network:
+    driver: bridge
+volumes:
+  laravel-volume:
+    driver: local
+
+
+
